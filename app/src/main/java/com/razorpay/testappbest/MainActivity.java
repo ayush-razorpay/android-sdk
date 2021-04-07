@@ -9,6 +9,10 @@ import android.os.Bundle;
 import com.razorpay.Checkout;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
 public class MainActivity extends Activity {
 
     @Override
@@ -45,14 +49,25 @@ public class MainActivity extends Activity {
             //You can omit the image option to fetch the image from dashboard
             options.put("image", "https://s3.amazonaws.com/rzp-mobile/images/rzp.png");
            options.put("currency", "INR");
-          //  options.put("amount", "100");
-            options.put("order_id", "order_Gku3aYRezpSXjQ");
+           options.put("amount", "100");
+           // options.put("order_id", "order_Gku3aYRezpSXjQ");
 
-            JSONObject preFill = new JSONObject();
-            preFill.put("email", "test@razorpay.com");
-            preFill.put("contact", "9876543210");
+//            JSONObject preFill = new JSONObject();
+//            preFill.put("email", "test@razorpay.com");
+//            preFill.put("contact", "9876543210");
 
-            options.put("prefill", preFill);
+//            options.put("prefill", preFill);
+
+
+            JSONObject config = new JSONObject();
+            JSONObject display = new JSONObject();
+            List<JSONObject> hide = new ArrayList<>();
+
+            hide.add((new JSONObject()).put("method","netbanking"));
+
+            display.put("hide",hide);
+            config.put("display",display);
+            options.put("config",config);
 
             co.open(activity, options);
         } catch (Exception e) {
