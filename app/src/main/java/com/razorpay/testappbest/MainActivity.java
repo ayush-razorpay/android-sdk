@@ -52,22 +52,22 @@ public class MainActivity extends Activity {
            options.put("amount", "100");
            // options.put("order_id", "order_Gku3aYRezpSXjQ");
 
-//            JSONObject preFill = new JSONObject();
-//            preFill.put("email", "test@razorpay.com");
-//            preFill.put("contact", "9876543210");
+            JSONObject preFill = new JSONObject();
+            preFill.put("email", "test@razorpay.com");
+            preFill.put("contact", "9876543210");
 
-//            options.put("prefill", preFill);
+            options.put("prefill", preFill);
 
 
-            JSONObject config = new JSONObject();
-            JSONObject display = new JSONObject();
-            List<JSONObject> hide = new ArrayList<>();
+            JSONObject method=new JSONObject();
 
-            hide.add((new JSONObject()).put("method","netbanking"));
+/************** add to this method object to disable specific payment methods***********/
 
-            display.put("hide",hide);
-            config.put("display",display);
-            options.put("config",config);
+            method.put("netbanking",false);
+            method.put("card",false);
+            method.put("wallet",false);
+
+            options.put("method",method);
 
             co.open(activity, options);
         } catch (Exception e) {
